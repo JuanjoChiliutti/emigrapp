@@ -1,0 +1,26 @@
+{
+  "name": "emigrapp",
+  "version": "1.0.0",
+  "description": "app to teach step by step how to get italian citizenship. ",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuanjoChiliutti/emigrapp.git"
+  },
+  "author": "JuanjoChiliutti, Giuxpro.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuanjoChiliutti/emigrapp/issues"
+  },
+  "homepage": "https://github.com/JuanjoChiliutti/emigrapp#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.4",
+    "nodemon": "^2.0.20"
+  }
+}
