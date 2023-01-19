@@ -5,7 +5,10 @@ const server = express();
 const bodyParser = require("body-parser");
 const routes = require("./Routes/route");
 
+
 require("./DB/db.js");
+
+
 server.use(cors());
 server.use(bodyParser.json());
 
