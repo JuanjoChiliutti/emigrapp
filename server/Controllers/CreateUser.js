@@ -1,4 +1,4 @@
-const userSchema = require("../Models/Users.js");
+const userSchema = require("../Models/users.js");
 
 const createUser = (req, res) => {
 
