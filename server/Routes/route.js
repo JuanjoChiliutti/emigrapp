@@ -1,14 +1,14 @@
 const express = require("express");
-const { createUser } = require("../Controllers/CreateUser");
-const { encriptingPass } = require("../Controllers/encriptingPass");
-const { requireToken } = require("../Middleware/requiretoken");
+const { signUp } = require("../Controllers/signUp");
+const { login } = require("../Controllers/login");
+const { requireToken } = require("../Middleware/requireToken");
 
 
 const router = express.Router();
 
 
-router.post("/signup", createUser);
-router.post("/login", encriptingPass);
+router.post("/signup", signUp);
+router.post("/login", login);
 router.get("/protected",  requireToken);
 
 

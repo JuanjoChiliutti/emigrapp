@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const { JWTKEY } = process.env
 
 
-const createUser = async(req, res) => {
+const signUp = async(req, res) => {
 
   const user = userSchema(req.body);
   try {
@@ -17,5 +17,5 @@ const createUser = async(req, res) => {
 };
 
 module.exports = {
-  createUser,
+  signUp,
 };
