@@ -1,5 +1,6 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
+import { useNavigation } from "@react-navigation/native";
 import {
   Alert,
   ImageBackground,
@@ -13,6 +14,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import image from "../../assets/bgemigrapp.jpg";
 
 export default function Landing() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
@@ -27,7 +30,7 @@ export default function Landing() {
           <View style={styles.field2}>
             <Pressable
               style={styles.btn}
-              onPress={() => Alert.alert("Simple Button pressed")}
+              onPress={() => navigation.navigate("Login")}
             >
               <Text style={styles.textBtn}>Ingresar</Text>
             </Pressable>
