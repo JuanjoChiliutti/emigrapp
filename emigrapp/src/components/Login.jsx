@@ -29,13 +29,14 @@ export default function Login() {
           <View style={styles.field1}>
             <Text style={styles.title}>EMIGRAR EN FAMILIA</Text>
           </View>
+
           <View style={styles.loginSecction}>
 
             <TouchableWithoutFeedback onPress={
               () => {
                 setActive(!active)
               }
-            }>
+            } >
 
               <View style={styles.switchBtn}>
 
@@ -44,9 +45,10 @@ export default function Login() {
 
               </View>
             </TouchableWithoutFeedback>
-            <Text style={styles.welcomeText}>¡Bienvenido!</Text>
-            <Text style={styles.subText}>Estas a punto de comenzar una nueva aventura</Text>
-          </View>
+            <View style={styles.cont2}>
+              <Text style={styles.welcomeText}>¡Bienvenido!</Text>
+              <Text style={styles.subText}>Estas a punto de comenzar una nueva aventura</Text>
+            </View>
           <View style={styles.cont2}>
             <TextInput name="Email" style={styles.inputEmail} placeholderTextColor={"#A6A4A4"} placeholder="Email"></TextInput>
             <TextInput name="Password" style={styles.inputPassword} placeholderTextColor={"#A6A4A4"} secureTextEntry={true} placeholder="Password"></TextInput>
@@ -72,6 +74,7 @@ export default function Login() {
                 AQUI
               </Text>
             </Text>
+          </View>
           </View>
 
         </LinearGradient>
@@ -118,7 +121,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#A6A4A4",
   },
   loginSecction: {
-    flex: 2.5,
+    flex: 1.5,
     backgroundColor: "#FFFFFF",
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
@@ -170,10 +173,10 @@ const styles = StyleSheet.create({
     marginTop: '1%',
   },
   switchBtn: {
-    flex: 2,
+    flex: 1,
     width: '90%',
     height: '13%',
-    backgroundColor: 'grey',
+    backgroundColor: '#CCCCCC',
     borderRadius: 40,
     marginTop: '7%',
     marginLeft: '5%',
@@ -195,7 +198,7 @@ const styles = StyleSheet.create({
   },
   btnLogin: {
     backgroundColor: '#25C90A',
-    width: '55%',
+    width: '50%',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 40,
@@ -203,7 +206,7 @@ const styles = StyleSheet.create({
   },
 
   btnSignup: {
-    width: '45%',
+    width: '50%',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -218,5 +221,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
     color: "#FDFDFD",
-  }
+  },
+ 
 });
