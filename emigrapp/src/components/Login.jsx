@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useForm, useController } from "react-hook-form";
 import {
-  Button,
   ImageBackground,
   Text,
   TextInput,
@@ -9,10 +8,13 @@ import {
   StyleSheet,
   Pressable,
   TouchableWithoutFeedback,
+  ScrollView,
 } from "react-native";
-import image from "../../assets/bgemigrapp.jpg";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
+
+import image from "../../assets/bgemigrapp.jpg";
 
 export default function Login() {
   const { control, handleSubmit } = useForm();
@@ -20,12 +22,12 @@ export default function Login() {
   const [active, setActive] = useState(true);
 
   return (
-    <View style={styles.container}>
-      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        <LinearGradient
-          style={styles.container}
-          colors={["transparent", "rgba(0,0,0,0.8)"]}
-        >
+    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+      <LinearGradient
+        style={styles.container}
+        colors={["transparent", "rgba(0,0,0,0.8)"]}
+      >
+        <KeyboardAwareScrollView style={styles.container}>
           <View style={styles.container}>
             <View style={styles.field1}>
               <Text style={styles.title}>EMIGRAR EN FAMILIA</Text>
@@ -72,8 +74,7 @@ export default function Login() {
                 <Pressable
                   style={styles.btn2}
                   onPress={() => {
-                    // navigation.navigate("#")
-                    console.log("apretaste boton 2");
+                    navigation.navigate("Home");
                   }}
                 >
                   <Text style={styles.textBtn}>Ingresar</Text>
@@ -91,9 +92,9 @@ export default function Login() {
               </View>
             </View>
           </View>
-        </LinearGradient>
-      </ImageBackground>
-    </View>
+        </KeyboardAwareScrollView>
+      </LinearGradient>
+    </ImageBackground>
   );
 }
 
@@ -124,14 +125,18 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     alignSelf: "center",
     marginBottom: "5%",
+    marginTop: 30,
     borderBottomColor: "#A6A4A4",
+    fontSize: 17,
   },
   inputPassword: {
     height: "30%",
     width: "80%",
     borderBottomWidth: 1,
-    alignSelf: "center",
     borderBottomColor: "#A6A4A4",
+    alignSelf: "center",
+    marginTop: 10,
+    fontSize: 17,
   },
   loginSecction: {
     flex: 2,
@@ -141,6 +146,7 @@ const styles = StyleSheet.create({
     height: "90%",
     alignSelf: "center",
     marginBottom: 40,
+    marginTop: 50,
   },
 
   btn2: {
@@ -150,7 +156,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 40,
     alignSelf: "center",
-    marginTop: "8%",
+    marginTop: 40,
   },
   textBtn: {
     textAlign: "center",
@@ -164,7 +170,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
     marginTop: "5%",
-    marginBottom: 30,
+    marginBottom: 50,
   },
   welcomeText: {
     color: "#000000",
@@ -190,7 +196,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   cont1: {
-    flex:1,
+    flex: 1,
   },
   cont2: {
     flex: 3,
@@ -200,7 +206,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   cont3: {
-    flex:3,
+    flex: 3,
   },
   btnLogin: {
     flex: 2,
@@ -209,6 +215,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 40,
+    height: 50,
   },
 
   btnSignup: {
