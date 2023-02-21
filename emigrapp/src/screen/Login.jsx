@@ -8,13 +8,14 @@ import {
   StyleSheet,
   Pressable,
   TouchableWithoutFeedback,
-  ScrollView,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 
 import image from "../../assets/bgemigrapp.jpg";
+import LoginInputs from "../components/LoginInputs";
+import SignupInputs from "../components/SignupInputs";
 
 export default function Login() {
   const { control, handleSubmit } = useForm();
@@ -49,47 +50,11 @@ export default function Login() {
                   </View>
                 </View>
               </TouchableWithoutFeedback>
-              <View style={styles.cont1}>
-                <Text style={styles.welcomeText}>¡Bienvenido!</Text>
-                <Text style={styles.subText}>
-                  Estas a punto de comenzar una nueva aventura
-                </Text>
-              </View>
-              <View style={styles.cont2}>
-                <TextInput
-                  name="Email"
-                  style={styles.inputEmail}
-                  placeholderTextColor={"#A6A4A4"}
-                  placeholder="Email"
-                ></TextInput>
-                <TextInput
-                  name="Password"
-                  style={styles.inputPassword}
-                  placeholderTextColor={"#A6A4A4"}
-                  secureTextEntry={true}
-                  placeholder="Password"
-                ></TextInput>
-              </View>
-              <View style={styles.cont3}>
-                <Pressable
-                  style={styles.btn2}
-                  onPress={() => {
-                    navigation.navigate("Home");
-                  }}
-                >
-                  <Text style={styles.textBtn}>Ingresar</Text>
-                </Pressable>
 
-                <Text style={styles.text}>
-                  Olvidaste la contraseña? {"\n"}Ingresa{" "}
-                  <Text
-                    style={{ color: "#ED0101" }}
-                    onPress={() => navigation.navigate("Landing")}
-                  >
-                    AQUI
-                  </Text>
-                </Text>
-              </View>
+          {
+            active ?   <LoginInputs /> : <SignupInputs />
+          }
+              
             </View>
           </View>
         </KeyboardAwareScrollView>
@@ -139,7 +104,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
   },
   loginSecction: {
-    flex: 2,
+    flex: 3,
     backgroundColor: "#FFFFFF",
     borderRadius: 40,
     width: "82%",
