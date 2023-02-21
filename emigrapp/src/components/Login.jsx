@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useForm, useController } from "react-hook-form";
 import {
-  Button,
   ImageBackground,
   Text,
   TextInput,
@@ -9,82 +8,101 @@ import {
   StyleSheet,
   Pressable,
   TouchableWithoutFeedback,
+  ScrollView,
 } from "react-native";
-import image from "../../assets/bgemigrapp.jpg";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
+
+import image from "../../assets/bgemigrapp.jpg";
 
 export default function Login() {
   const { control, handleSubmit } = useForm();
   const navigation = useNavigation();
-  const [active, setActive] = useState(true)
+  const [active, setActive] = useState(true);
 
   return (
-    <View style={styles.container}>
-      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        <LinearGradient
-          style={styles.container}
-          colors={["transparent", "rgba(0,0,0,0.8)"]}
-        >
-          <View style={styles.field1}>
-            <Text style={styles.title}>EMIGRAR EN FAMILIA</Text>
-          </View>
-          <View style={styles.loginSecction}>
+    <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+      <LinearGradient
+        style={styles.container}
+        colors={["transparent", "rgba(0,0,0,0.8)"]}
+      >
+        <KeyboardAwareScrollView style={styles.container}>
+          <View style={styles.container}>
+            <View style={styles.field1}>
+              <Text style={styles.title}>EMIGRAR EN FAMILIA</Text>
+            </View>
 
-            <TouchableWithoutFeedback onPress={
-              () => {
-                setActive(!active)
-              }
-            }>
-
-              <View style={styles.switchBtn}>
-
-                <View style={active ? styles.btnLogin : styles.btnSignup}><Text style={styles.btnLoginTxt}>Log in</Text></View>
-                <View style={active ? styles.btnSignup : styles.btnLogin}><Text style={styles.btnSignupTxt}>Sign Up</Text></View>
-
-              </View>
-            </TouchableWithoutFeedback>
-            <Text style={styles.welcomeText}>¡Bienvenido!</Text>
-            <Text style={styles.subText}>Estas a punto de comenzar una nueva aventura</Text>
-          </View>
-          <View style={styles.cont2}>
-            <TextInput name="Email" style={styles.inputEmail} placeholderTextColor={"#A6A4A4"} placeholder="Email"></TextInput>
-            <TextInput name="Password" style={styles.inputPassword} placeholderTextColor={"#A6A4A4"} secureTextEntry={true} placeholder="Password"></TextInput>
-          </View>
-          <View style={styles.cont3}>
-            <Pressable
-              style={styles.btn2}
-              onPress={() => {
-                // navigation.navigate("#")
-                console.log('apretaste boton 2')
-              }
-              }
-            >
-              <Text style={styles.textBtn}>Ingresar</Text>
-            </Pressable>
-
-            <Text style={styles.text}>
-              Olvidaste la contraseña? {"\n"}Ingresa{" "}
-              <Text
-                style={{ color: "#ED0101" }}
-                onPress={() => navigation.navigate("Landing")}
+            <View style={styles.loginSecction}>
+              <TouchableWithoutFeedback
+                onPress={() => {
+                  setActive(!active);
+                }}
+                style={styles.switchBtn}
               >
-                AQUI
-              </Text>
-            </Text>
-          </View>
+                <View style={styles.switchBtn}>
+                  <View style={active ? styles.btnLogin : styles.btnSignup}>
+                    <Text style={styles.btnLoginTxt}>Log in</Text>
+                  </View>
+                  <View style={active ? styles.btnSignup : styles.btnLogin}>
+                    <Text style={styles.btnSignupTxt}>Sign Up</Text>
+                  </View>
+                </View>
+              </TouchableWithoutFeedback>
+              <View style={styles.cont1}>
+                <Text style={styles.welcomeText}>¡Bienvenido!</Text>
+                <Text style={styles.subText}>
+                  Estas a punto de comenzar una nueva aventura
+                </Text>
+              </View>
+              <View style={styles.cont2}>
+                <TextInput
+                  name="Email"
+                  style={styles.inputEmail}
+                  placeholderTextColor={"#A6A4A4"}
+                  placeholder="Email"
+                ></TextInput>
+                <TextInput
+                  name="Password"
+                  style={styles.inputPassword}
+                  placeholderTextColor={"#A6A4A4"}
+                  secureTextEntry={true}
+                  placeholder="Password"
+                ></TextInput>
+              </View>
+              <View style={styles.cont3}>
+                <Pressable
+                  style={styles.btn2}
+                  onPress={() => {
+                    navigation.navigate("Home");
+                  }}
+                >
+                  <Text style={styles.textBtn}>Ingresar</Text>
+                </Pressable>
 
-        </LinearGradient>
-      </ImageBackground>
-    </View>
+                <Text style={styles.text}>
+                  Olvidaste la contraseña? {"\n"}Ingresa{" "}
+                  <Text
+                    style={{ color: "#ED0101" }}
+                    onPress={() => navigation.navigate("Landing")}
+                  >
+                    AQUI
+                  </Text>
+                </Text>
+              </View>
+            </View>
+          </View>
+        </KeyboardAwareScrollView>
+      </LinearGradient>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 6,
-    width: '100%',
-    height: '100%',
+    flex: 1,
+    width: "100%",
+    height: "100%",
   },
   image: {
     flex: 1,
@@ -95,50 +113,50 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 32,
     textAlign: "center",
-    marginTop: 220,
+    marginTop: 190,
   },
   field1: {
     flexDirection: "column",
-    flex: 2,
+    flex: 1,
   },
   inputEmail: {
-    
-    height: '30%',
-    width: '80%',
+    height: "30%",
+    width: "80%",
     borderBottomWidth: 1,
     alignSelf: "center",
-    marginBottom: '5%',
+    marginBottom: "5%",
+    marginTop: 30,
     borderBottomColor: "#A6A4A4",
+    fontSize: 17,
   },
   inputPassword: {
-    height: '30%',
-    width: '80%',
+    height: "30%",
+    width: "80%",
     borderBottomWidth: 1,
-    alignSelf: "center",
     borderBottomColor: "#A6A4A4",
+    alignSelf: "center",
+    marginTop: 10,
+    fontSize: 17,
   },
   loginSecction: {
-    flex: 2.5,
+    flex: 2,
     backgroundColor: "#FFFFFF",
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-    width: '82%',
-    height: '90%',
+    borderRadius: 40,
+    width: "82%",
+    height: "90%",
     alignSelf: "center",
-
+    marginBottom: 40,
+    marginTop: 50,
   },
 
-
   btn2: {
-    color: "red",
     backgroundColor: "#25C90A",
-    width: '90%',
-    height: '35%',
+    width: "90%",
+    height: "30%",
     justifyContent: "center",
     borderRadius: 40,
     alignSelf: "center",
-    marginTop: '8%'
-
+    marginTop: 40,
   },
   textBtn: {
     textAlign: "center",
@@ -151,72 +169,70 @@ const styles = StyleSheet.create({
     color: "#000000",
     fontWeight: "bold",
     fontSize: 18,
-    marginTop: '5%',
-    marginBottom: 30,
-
+    marginTop: "5%",
+    marginBottom: 50,
   },
   welcomeText: {
     color: "#000000",
     fontWeight: "bold",
     fontSize: 25,
     alignSelf: "center",
-    marginTop: '5%',
   },
   subText: {
     color: "#000000",
     fontWeight: "bold",
     fontSize: 15,
     alignSelf: "center",
-    marginTop: '1%',
   },
   switchBtn: {
-    flex: 2,
-    width: '90%',
-    height: '13%',
-    backgroundColor: 'grey',
+    flex: 1,
+    width: "90%",
+    height: "13%",
+    backgroundColor: "#CCCCCC",
     borderRadius: 40,
-    marginTop: '7%',
-    marginLeft: '5%',
-    marginBottom: '7%',
+    marginTop: "7%",
+    marginLeft: "5%",
+    marginBottom: "7%",
     flexDirection: "row",
   },
-
+  cont1: {
+    flex: 1,
+  },
   cont2: {
-    flex: 2,
+    flex: 3,
     justifyContent: "center",
-    backgroundColor: '#FFF',
-    width: '82%',
-    alignSelf: 'center',
-    borderBottomLeftRadius: 40,
-    borderBottomRightRadius: 40,
+    backgroundColor: "#FFF",
+    width: "82%",
+    alignSelf: "center",
   },
   cont3: {
-    flex: 2,
+    flex: 3,
   },
   btnLogin: {
-    backgroundColor: '#25C90A',
-    width: '55%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 2,
+    backgroundColor: "#25C90A",
+    width: "50%",
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 40,
-
+    height: 50,
   },
 
   btnSignup: {
-    width: '45%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "50%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   btnLoginTxt: {
-    marginLeft: '5%',
+    marginLeft: "5%",
     fontWeight: "bold",
     fontSize: 18,
     color: "#FDFDFD",
   },
   btnSignupTxt: {
-    marginLeft: '5%',
+    marginLeft: "5%",
     fontWeight: "bold",
     fontSize: 18,
     color: "#FDFDFD",
-  }
+  },
 });
