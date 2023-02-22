@@ -16,13 +16,17 @@ const userSchema = new mongoose.Schema({
   },
   birthday: {
     type: String,
-    required: true,
   },
   premium: {
     type: Boolean,
     default: false,
   },
-
+  image:{
+    type: String,
+  },
+  nationality: {
+    type: String,
+  },
   admin: {
     type: Boolean,
     default: false,
