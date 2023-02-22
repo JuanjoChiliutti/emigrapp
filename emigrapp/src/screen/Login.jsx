@@ -1,25 +1,20 @@
 import React, { useState } from "react";
-import { useForm, useController } from "react-hook-form";
 import {
   ImageBackground,
   Text,
-  TextInput,
   View,
   StyleSheet,
-  Pressable,
   TouchableWithoutFeedback,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { LinearGradient } from "expo-linear-gradient";
-import { useNavigation } from "@react-navigation/native";
 
 import image from "../../assets/bgemigrapp.jpg";
-import LoginInputs from "../components/LoginInputs";
-import SignupInputs from "../components/SignupInputs";
+import LoginInputs from "../components/loginRenderOptions/LoginInputs";
+import SignupInputs from "../components/loginRenderOptions/SignupInputs";
 
 export default function Login() {
-  const { control, handleSubmit } = useForm();
-  const navigation = useNavigation();
+
   const [active, setActive] = useState(true);
 
   return (
