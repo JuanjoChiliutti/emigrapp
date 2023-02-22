@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   Text,
   TextInput,
@@ -10,9 +9,11 @@ import {
 
 import { useNavigation } from "@react-navigation/native";
 
-export default function LoginInputs() {
+
+export default function SignupInputs() {
 
     const navigation = useNavigation();
+
   return (
     <View>
       <View style={styles.cont1}>
@@ -23,6 +24,12 @@ export default function LoginInputs() {
         </Text>
       </View>
       <View style={styles.cont2}>
+        <TextInput
+          name="Name"
+          style={styles.inputEmail}
+          placeholderTextColor={"#A6A4A4"}
+          placeholder="Name"
+        ></TextInput>
         <TextInput
           name="Email"
           style={styles.inputEmail}
@@ -36,34 +43,31 @@ export default function LoginInputs() {
           secureTextEntry={true}
           placeholder="Password"
         ></TextInput>
+        <TextInput
+          name="Confirm-Password"
+          style={styles.inputPassword}
+          placeholderTextColor={"#A6A4A4"}
+          secureTextEntry={true}
+          placeholder="Confirm Password"
+        ></TextInput>
       </View>
       <View style={styles.cont3}>
         <Pressable
           style={styles.btn2}
           onPress={() => {
-            navigation.navigate("Home");
+            navigation.navigate("TabNavigation");
           }}
         >
-          <Text style={styles.textBtn}>Ingresar</Text>
+          <Text style={styles.textBtn}>Registrar</Text>
         </Pressable>
 
-        <Text style={styles.text}>
-          Olvidaste la contraseña? {"\n"}Ingresa{" "}
-          <Text
-            style={{ color: "#ED0101" }}
-            onPress={() => navigation.navigate("Landing")}
-          >
-            AQUI
-          </Text>
-        </Text>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
- 
- 
+    
   title: {
     color: "#FDFDFD",
     fontWeight: "bold",
@@ -72,32 +76,32 @@ const styles = StyleSheet.create({
     marginTop: 190,
   },
   inputEmail: {
-    height: "30%",
+    height: "20%",
     width: "80%",
     borderBottomWidth: 1,
     alignSelf: "center",
-    marginBottom: "5%",
-    marginTop: 30,
+    marginTop: 15,
     borderBottomColor: "#A6A4A4",
     fontSize: 17,
   },
   inputPassword: {
-    height: "30%",
+    height: "20%",
     width: "80%",
     borderBottomWidth: 1,
     borderBottomColor: "#A6A4A4",
     alignSelf: "center",
-    marginTop: 10,
+    marginTop: 15,
     fontSize: 17,
   },
   btn2: {
     backgroundColor: "#25C90A",
     width: "90%",
-    height: "30%",
+    height: "50%",
     justifyContent: "center",
     borderRadius: 40,
     alignSelf: "center",
-    marginTop: 40,
+    marginBottom: 50,
+    marginTop: 30,
   },
   textBtn: {
     textAlign: "center",
@@ -127,6 +131,7 @@ const styles = StyleSheet.create({
   },
   cont1: {
     flex: 1,
+    marginBottom: 20,
   },
   cont2: {
     flex: 3,
@@ -134,8 +139,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     width: "82%",
     alignSelf: "center",
+    marginBottom: 10,
   },
   cont3: {
     flex: 3,
   },
-});
+})
