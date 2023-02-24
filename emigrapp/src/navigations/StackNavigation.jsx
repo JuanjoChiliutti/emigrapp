@@ -11,27 +11,27 @@ const Stack = createNativeStackNavigator();
 
 export default function StackNavigation() {
   const [isLogged, setIsLogged] = useState(false)
-  useEffect( async () =>{
+  
+  const getToken = async () => {
     const token = await AsyncStorage.getItem('token');
     if(token){
       setIsLogged(true);
     }else{
       setIsLogged(false);
     }
+    console.log("clg from inside",token)
+  };
+  
+  useEffect(() =>{
+    getToken()
   },[])
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen options={{ title: '', headerShown:false }} name="Landing" component={Landing} />
-        {
-          isLogged 
-          ?
-          <Stack.Screen options={{ title: '', headerShown:false}} name="TabNavigation" component={TabNavigation}/>
-          :
-          <Stack.Screen options={{ title: '', headerShown:false }} name="Login" component={Login}/>
-        }
-       
+        <Stack.Screen options={{ title: '', headerShown:false }} name="Login" component={Login}/>
+        <Stack.Screen options={{ title: '', headerShown:false}} name="TabNavigation" component={TabNavigation}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

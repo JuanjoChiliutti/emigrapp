@@ -8,6 +8,7 @@ import Home from '../screen/Home';
 import Perfil from '../components/homeRenderOptions/Perfil';
 import Premium from '../components/homeRenderOptions/Premium';
 import Noticias from '../components/homeRenderOptions/Noticias';
+import Logout from '../components/homeRenderOptions/Logout';
 
 
 const Tab = createBottomTabNavigator();
@@ -28,6 +29,9 @@ export default function TabNavigation() {
                 break;
             case 'Premium':
                 iconName = 'cart';
+                break;
+            case 'Logout':
+                iconName = 'logout';
                 break;
 
         }
@@ -76,6 +80,11 @@ export default function TabNavigation() {
             <Tab.Screen
                 name="Premium"
                 component={Premium}
+                options={{ title: '', headerShown:false }}
+            />
+            <Tab.Screen
+                name="Logout"
+                component={Logout}
                 options={{ title: '', headerShown:false }}
             />
         </Tab.Navigator>

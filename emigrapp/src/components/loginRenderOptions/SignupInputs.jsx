@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import TabNavigation from "../../navigations/TabNavigation";
 
 
 export default function SignupInputs() {
@@ -17,7 +18,7 @@ export default function SignupInputs() {
 
     const navigation = useNavigation();
 
-    const sendCred = () => {
+    const sendCred = async () => {
     
       fetch('http://10.0.2.2:3000/signup', {
         method: 'POST',
@@ -35,12 +36,14 @@ export default function SignupInputs() {
       .then(async (data) => {
         try {
           await AsyncStorage.setItem('token', data.token)
-          const t = await AsyncStorage.getItem('token')
-          console.log('clg de token: ',t)
+          
         } catch (error) {
           console.log(error)
         }
       })
+      const t = await AsyncStorage.getItem('token')
+          console.log('clg de token: ',t)
+          return t
     }
 
   return (
@@ -90,10 +93,7 @@ export default function SignupInputs() {
         <Pressable
           style={styles.btn2}
           onPress={() => {
-            sendCred()
-            console.log(sendCred())
-              // navigation.navigate("TabNavigation");
-            
+            sendCred() ? navigation.navigate("TabNavigation") : navigation.navigate("Login")
           }}
         >
           <Text style={styles.textBtn}>Registrar</Text>
