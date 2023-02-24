@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import TabNavigation from "../../navigations/TabNavigation";
 
 
 export default function SignupInputs() {
@@ -36,14 +35,12 @@ export default function SignupInputs() {
       .then(async (data) => {
         try {
           await AsyncStorage.setItem('token', data.token)
-          
+          navigation.navigate("TabNavigation")
         } catch (error) {
           console.log(error)
         }
       })
-      const t = await AsyncStorage.getItem('token')
-          console.log('clg de token: ',t)
-          return t
+     
     }
 
   return (
@@ -93,7 +90,7 @@ export default function SignupInputs() {
         <Pressable
           style={styles.btn2}
           onPress={() => {
-            sendCred() ? navigation.navigate("TabNavigation") : navigation.navigate("Login")
+            sendCred()
           }}
         >
           <Text style={styles.textBtn}>Registrar</Text>

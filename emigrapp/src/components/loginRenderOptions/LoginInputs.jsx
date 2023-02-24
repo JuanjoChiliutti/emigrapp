@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import {
   Text,
@@ -9,10 +9,37 @@ import {
 } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginInputs() {
-
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const navigation = useNavigation();
+
+    const sendCred = async () => {
+    
+      fetch('http://10.0.2.2:3000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'email': email,
+          'password': password
+        })
+      })
+      
+      .then(res => res.json())
+      .then(async (data) => {
+        try {
+          await AsyncStorage.setItem('token', data.token)
+          navigation.navigate("TabNavigation")
+        } catch (error) {
+          console.log(error)
+        }
+      })
+    }
+
   return (
     <View>
       <View style={styles.cont1}>
@@ -28,6 +55,8 @@ export default function LoginInputs() {
           style={styles.inputEmail}
           placeholderTextColor={"#A6A4A4"}
           placeholder="Email"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
         ></TextInput>
         <TextInput
           name="Password"
@@ -35,13 +64,15 @@ export default function LoginInputs() {
           placeholderTextColor={"#A6A4A4"}
           secureTextEntry={true}
           placeholder="Password"
+          value={password}
+          onChangeText={(text) => setPassword(text)}
         ></TextInput>
       </View>
       <View style={styles.cont3}>
         <Pressable
           style={styles.btn2}
           onPress={() => {
-            navigation.navigate("TabNavigation");
+            sendCred()
           }}
         >
           <Text style={styles.textBtn}>Ingresar</Text>

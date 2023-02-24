@@ -10,16 +10,9 @@ import TabNavigation from "./TabNavigation";
 const Stack = createNativeStackNavigator();
 
 export default function StackNavigation() {
-  const [isLogged, setIsLogged] = useState(false)
   
   const getToken = async () => {
-    const token = await AsyncStorage.getItem('token');
-    if(token){
-      setIsLogged(true);
-    }else{
-      setIsLogged(false);
-    }
-    console.log("clg from inside",token)
+    await AsyncStorage.getItem('token');
   };
   
   useEffect(() =>{
