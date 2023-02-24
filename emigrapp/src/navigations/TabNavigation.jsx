@@ -61,18 +61,22 @@ export default function TabNavigation() {
             <Tab.Screen
                 name="Home"
                 component={Home}
+                options={{ title: '', headerShown:false }}
             />
             <Tab.Screen
                 name="Noticias"
                 component={Noticias}
+                options={{ title: '', headerShown:false }}
             />
             <Tab.Screen
                 name="Perfil"
                 component={Perfil}
+                options={{ title: '', headerShown:false }}
             />
             <Tab.Screen
                 name="Premium"
                 component={Premium}
+                options={{ title: '', headerShown:false }}
             />
         </Tab.Navigator>
   )

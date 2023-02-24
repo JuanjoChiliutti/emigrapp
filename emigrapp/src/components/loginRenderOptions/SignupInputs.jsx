@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Text,
   TextInput,
@@ -6,13 +6,42 @@ import {
   StyleSheet,
   Pressable,
 } from "react-native";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 
 
 export default function SignupInputs() {
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const navigation = useNavigation();
+
+    const sendCred = () => {
+    
+      fetch('http://10.0.2.2:3000/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'name': name, 
+          'email': email,
+          'password': password
+        })
+      })
+      
+      .then(res => res.json())
+      .then(async (data) => {
+        try {
+          await AsyncStorage.setItem('token', data.token)
+          const t = await AsyncStorage.getItem('token')
+          console.log('clg de token: ',t)
+        } catch (error) {
+          console.log(error)
+        }
+      })
+    }
 
   return (
     <View>
@@ -26,22 +55,28 @@ export default function SignupInputs() {
       <View style={styles.cont2}>
         <TextInput
           name="Name"
+          value={name}
           style={styles.inputEmail}
           placeholderTextColor={"#A6A4A4"}
           placeholder="Name"
+          onChangeText={(text)=>setName(text)}
         ></TextInput>
         <TextInput
           name="Email"
+          value={email}
           style={styles.inputEmail}
           placeholderTextColor={"#A6A4A4"}
           placeholder="Email"
+          onChangeText={(text)=>setEmail(text)}
         ></TextInput>
         <TextInput
           name="Password"
+          value = {password}
           style={styles.inputPassword}
           placeholderTextColor={"#A6A4A4"}
           secureTextEntry={true}
           placeholder="Password"
+          onChangeText={(text)=>setPassword(text)}
         ></TextInput>
         <TextInput
           name="Confirm-Password"
@@ -55,7 +90,10 @@ export default function SignupInputs() {
         <Pressable
           style={styles.btn2}
           onPress={() => {
-            navigation.navigate("TabNavigation");
+            sendCred()
+            console.log(sendCred())
+              // navigation.navigate("TabNavigation");
+            
           }}
         >
           <Text style={styles.textBtn}>Registrar</Text>
