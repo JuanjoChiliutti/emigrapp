@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ImageBackground,
   Text,
@@ -8,6 +8,8 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import image from "../../assets/bgemigrapp.jpg";
 import LoginInputs from "../components/loginRenderOptions/LoginInputs";
@@ -16,7 +18,21 @@ import SignupInputs from "../components/loginRenderOptions/SignupInputs";
 export default function Login() {
 
   const [active, setActive] = useState(true);
+  const navigation = useNavigation();
 
+  const detectLogin = async ()=>{
+    const token = await AsyncStorage.getItem('token');
+    if (token) {
+      navigation.navigate('TabNavigation');
+    }else{
+      navigation.navigate('Login');
+    }
+  }
+
+  useEffect(() => {
+    detectLogin()
+  }, []);
+  
   return (
     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
       <LinearGradient

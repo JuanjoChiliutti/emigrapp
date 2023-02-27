@@ -17,7 +17,7 @@ export default function SignupInputs() {
 
     const navigation = useNavigation();
 
-    const sendCred = () => {
+    const sendCred = async () => {
     
       fetch('http://10.0.2.2:3000/signup', {
         method: 'POST',
@@ -35,12 +35,12 @@ export default function SignupInputs() {
       .then(async (data) => {
         try {
           await AsyncStorage.setItem('token', data.token)
-          const t = await AsyncStorage.getItem('token')
-          console.log('clg de token: ',t)
+          navigation.navigate("TabNavigation")
         } catch (error) {
           console.log(error)
         }
       })
+     
     }
 
   return (
@@ -91,9 +91,6 @@ export default function SignupInputs() {
           style={styles.btn2}
           onPress={() => {
             sendCred()
-            console.log(sendCred())
-              // navigation.navigate("TabNavigation");
-            
           }}
         >
           <Text style={styles.textBtn}>Registrar</Text>
