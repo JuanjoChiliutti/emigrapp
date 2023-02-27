@@ -11,9 +11,12 @@ import { useNavigation } from "@react-navigation/native";
 
 
 export default function SignupInputs() {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+  const [inputs, setInputs] = useState({
+    name: "",
+    email:"",
+    password:"",
+    confirmPassword: "",
+  })
 
     const navigation = useNavigation();
 
@@ -25,9 +28,10 @@ export default function SignupInputs() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          'name': name, 
-          'email': email,
-          'password': password
+          'name': inputs.name, 
+          'email': inputs.email,
+          'password': inputs.password,
+          'confirmPassword': inputs.confirmPassword
         })
       })
       
@@ -42,6 +46,20 @@ export default function SignupInputs() {
       })
      
     }
+   
+
+    const clearInputs = () => {
+      setInputs({
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      })
+    }
+   
+    const onChange = (e,type) => {
+      setInputs({ ...inputs, [type]: e.nativeEvent.text})
+    }
 
   return (
     <View>
@@ -55,28 +73,28 @@ export default function SignupInputs() {
       <View style={styles.cont2}>
         <TextInput
           name="Name"
-          value={name}
           style={styles.inputEmail}
           placeholderTextColor={"#A6A4A4"}
           placeholder="Name"
-          onChangeText={(text)=>setName(text)}
+          value={inputs.name}
+          onChange={(e) => onChange(e, "name")}
         ></TextInput>
         <TextInput
           name="Email"
-          value={email}
           style={styles.inputEmail}
           placeholderTextColor={"#A6A4A4"}
           placeholder="Email"
-          onChangeText={(text)=>setEmail(text)}
+          value={inputs.email}
+          onChange={(e) => onChange(e,"email")}
         ></TextInput>
         <TextInput
           name="Password"
-          value = {password}
           style={styles.inputPassword}
           placeholderTextColor={"#A6A4A4"}
           secureTextEntry={true}
           placeholder="Password"
-          onChangeText={(text)=>setPassword(text)}
+          value = {inputs.password}
+          onChange={(e) => onChange(e,"password")}
         ></TextInput>
         <TextInput
           name="Confirm-Password"
@@ -84,6 +102,8 @@ export default function SignupInputs() {
           placeholderTextColor={"#A6A4A4"}
           secureTextEntry={true}
           placeholder="Confirm Password"
+          value={inputs.confirmPassword}
+          onChange={(e) => onChange(e,"confirmPassword")}
         ></TextInput>
       </View>
       <View style={styles.cont3}>
@@ -91,6 +111,8 @@ export default function SignupInputs() {
           style={styles.btn2}
           onPress={() => {
             sendCred()
+            clearInputs()
+            console.log(inputs)
           }}
         >
           <Text style={styles.textBtn}>Registrar</Text>
