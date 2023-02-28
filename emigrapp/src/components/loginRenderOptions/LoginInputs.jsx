@@ -12,8 +12,10 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginInputs() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [inputs, setInputs] = useState({
+      email:"",
+      password:"",
+    })
     const navigation = useNavigation();
 
     const sendCred = async () => {
@@ -24,8 +26,8 @@ export default function LoginInputs() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          'email': email,
-          'password': password
+          'email': inputs.email,
+          'password': inputs.password
         })
       })
       
@@ -39,6 +41,30 @@ export default function LoginInputs() {
         }
       })
     }
+
+    // const Validate = () => {
+    //   var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    //   if (!email) {
+    //     Toast.show('Email is required.');
+    //   } else if (!email.match(validRegex)) {
+    //     Toast.show('Invalid Email');
+    //   } else if (!password) {
+    //     Toast.show('Password is required.');
+    //   }
+    // }
+
+    const clearInputs = () => {
+      setInputs({
+        email: '',
+        password: ''
+      })
+    }
+   
+    const onChange = (e,type) => {
+      setInputs({ ...inputs, [type]: e.nativeEvent.text})
+    }
+  
 
   return (
     <View>
@@ -55,8 +81,8 @@ export default function LoginInputs() {
           style={styles.inputEmail}
           placeholderTextColor={"#A6A4A4"}
           placeholder="Email"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
+          value={inputs.email}
+          onChange={(e) => onChange(e,"email")}
         ></TextInput>
         <TextInput
           name="Password"
@@ -64,8 +90,8 @@ export default function LoginInputs() {
           placeholderTextColor={"#A6A4A4"}
           secureTextEntry={true}
           placeholder="Password"
-          value={password}
-          onChangeText={(text) => setPassword(text)}
+          value={inputs.password}
+          onChange={(e) => onChange(e,"password")}
         ></TextInput>
       </View>
       <View style={styles.cont3}>
@@ -73,6 +99,8 @@ export default function LoginInputs() {
           style={styles.btn2}
           onPress={() => {
             sendCred()
+            clearInputs()
+            console.log(inputs)
           }}
         >
           <Text style={styles.textBtn}>Ingresar</Text>
